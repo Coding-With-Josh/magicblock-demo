@@ -3,6 +3,12 @@ import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from ".
 import { Badge } from "../components/ui/badge";
 import { Card } from "../components/ui/card";
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip } from "recharts";
+import Image from "next/image";
+
+// Import your background image - make sure it's in the correct path
+// If using a static import, you need to adjust the path accordingly
+// For example, if your image is in public folder: 
+// import bgImage from "@/public/bg.jpg";
 
 export default function Page() {
   const data = [
@@ -14,8 +20,22 @@ export default function Page() {
   ];
   
   return (
-    <main className="min-h-screen bg-gradient-to-br from-neutral-900 to-black text-white flex flex-col items-center justify-center p-4">
-      <div className="max-w-2xl w-full p-6 rounded-2xl mb-6 backdrop-blur-md bg-white/5 border border-white/10 shadow-2xl">
+    <main className="min-h-screen text-white flex flex-col items-center relative justify-center p-4 overflow-hidden">
+      {/* Background image with overlay for better readability */}
+      <div className="fixed inset-0 w-full h-full z-[-20]">
+        {/* If you're using a static image from public folder */}
+        <Image 
+          src="/bg.jpg" 
+          alt="background" 
+          fill
+          priority 
+          className="object-cover"
+        />
+        {/* Dark overlay to ensure text is readable */}
+        <div className="absolute inset-0 bg-black/60"></div>
+      </div>
+      
+      <div className="max-w-2xl w-full p-6 rounded-2xl mb-6 backdrop-blur-sm bg-white/1 border border-white/10 shadow-2xl z-10">
         <h1 className="text-3xl font-bold mb-3 text-center tracking-tight bg-gradient-to-r from-white to-neutral-300 bg-clip-text text-transparent">
           MagicBlock Real-Time Oracle
         </h1>
@@ -86,15 +106,15 @@ export default function Page() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-6">
           <Card className="backdrop-blur-md bg-white/10 border border-white/15 p-4 rounded-xl shadow-lg">
             <h3 className="text-sm font-semibold mb-1 text-neutral-300">Price update</h3>
-            <div className="text-2xl font-bold">$1,234.56</div>
+            <div className="text-2xl font-bold text-white">$1,234.56</div>
           </Card>
           <Card className="backdrop-blur-md bg-white/10 border border-white/15 p-4 rounded-xl shadow-lg">
             <h3 className="text-sm font-semibold mb-1 text-neutral-300">Updates/Second</h3>
-            <div className="text-2xl font-bold">12</div>
+            <div className="text-2xl font-bold text-white">12</div>
           </Card>
           <Card className="backdrop-blur-md bg-white/10 border border-white/15 p-4 rounded-xl shadow-lg">
             <h3 className="text-sm font-semibold mb-1 text-neutral-300">MS/update</h3>
-            <div className="text-2xl font-bold">150ms</div>
+            <div className="text-2xl font-bold text-white">150ms</div>
           </Card>
         </div>
       </div>
